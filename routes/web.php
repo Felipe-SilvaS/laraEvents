@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('register',  [RegisterController::class, 'create'])->name('auth.register.create');
+Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');// Rota de cadastro de Usuarios
+
+
+
