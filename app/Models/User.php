@@ -29,8 +29,14 @@ class User extends Model
         'password'
     ];
 
-    //Mutators
+    //relationships
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 
+    //Mutators
+    
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
