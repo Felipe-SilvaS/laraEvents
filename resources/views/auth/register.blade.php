@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <div>{{ var_dump($errors) }}</div>
+
+
     <h1 class="text-center my-4">Criar conta</h1>
 
     <div class="card shadow my-5 w-75 mx-auto">
@@ -130,21 +131,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="phones[0][number]"
-                                class="form-control phone{{ $errors->has('phone.0.number') ? 'is-invalid' : '' }}"
-                                placeholder="Telefone" value='{{ old('phone.0.number') }}'>
-                            <div class="invalid-feedback">{{ $errors->first('phone.0.number') }}</div>
+                                class="form-control phone {{ $errors->has('phones.0.number') ? 'is-invalid' : '' }}"
+                                placeholder="Telefone" value='{{ old('phones.number') }}'>
+                            <div class="invalid-feedback">{{ $errors->first('phones.0.number') }}</div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="phones[1][number]"
-                                class="form-control cellphone{{ $errors->has('phone.1.number') ? 'is-invalid' : '' }}"
-                                placeholder="Celular" value='{{ old('phone.1.number') }}'>
-                            <div class="invalid-feedback">{{ $errors->first('phone.1.number') }}</div>
+                                class="form-control cellphone {{ $errors->has('phones.1.number') ? 'is-invalid' : '' }}"
+                                placeholder="Celular" value='{{ old('phones.1.number') }}'>
+                            <div class="invalid-feedback">{{ $errors->first('phones.1.number') }}</div>
                         </div>
                     </div>
                 </div>
-
 
                 <button type="submit" class="btn btn-success btn-block mt-3">Criar conta</button>
             </form>

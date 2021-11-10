@@ -30,8 +30,8 @@ class RegisterRequest extends FormRequest
             'user.email' => ['required', 'email', 'unique:users,email'],
             'user.cpf' => ['required', new Cpf, 'unique:users,cpf'],
             'user.password' => ['required', 'min:8', 'confirmed  '],
-            'phone.0.number' => ['required', 'sized:20'],
-            'phone.1.number' => ['required', 'sized:20'],
+            'phones.0.number' => ['required', 'size :14'],
+            'phones.1.number' => ['required', 'size:16'],
             'address.cep' => 'required',
             'address.uf' => ['required', 'size:2'],
             'address.city' => 'required',
@@ -49,8 +49,8 @@ class RegisterRequest extends FormRequest
             'user.email' => 'email',
             'user.cpf' => 'CPF',
             'user.password' => 'senha',
-            'phone.0.number' => 'telefone',
-            'phone.1.number' => 'celular',
+            'phones.0.number' => 'telefone',
+            'phones.1.number' => 'celular',
             'address.cep' => 'CEP',
             'address.uf' => 'UF',
             'address.city' => 'cidade',
@@ -61,5 +61,9 @@ class RegisterRequest extends FormRequest
         ];
     }
 
+    public function messages(){
+        return [
 
+        ];
+    }
 }

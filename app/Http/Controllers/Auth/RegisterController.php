@@ -17,7 +17,7 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        $requestData = $request->validate();
+        $requestData = $request->validated();
 
         $requestData['user']['role'] = 'participant';
 
@@ -31,9 +31,10 @@ class RegisterController extends Controller
                 $user->phones()->create($phone);            //cria o telefone
             }
             DB::commit();
+            return 'Mensagem: usuário cadastrado';
         } catch (\Exception $exception) {
             DB::rollback();
-            return 'Mensagem: ' . $exception->getMessage();
+            return 'Mesagem: ' . $exception->getMessage();
         }
 
         /*
