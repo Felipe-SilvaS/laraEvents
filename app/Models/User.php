@@ -32,11 +32,15 @@ class User extends Model
     //relationships
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class); // relacionamento 1:N
+    }
+
+    public function phones(){
+        return $this->hasMany(Phone::class); // relacionamento N:N
     }
 
     //Mutators
-    
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

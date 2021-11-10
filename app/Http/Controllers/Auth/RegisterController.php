@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\{User, Adrress};
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -13,14 +15,26 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $requestData = $request->all();
-        $requestData['user']['role'] = 'participant' ;
+        $requestData = $request->validate();
 
-        $user = User::create($requestData['user']);
+        $requestData['user']['role'] = 'participant';
 
-        $user->address()->create($requestData['address']);
+        DB::beginTransaction();
+        try {
+            $user = User::create($requestData['user']); // cria o usuario
+
+            $user->address()->create($requestData['address']); //cria o edereco
+
+            foreach ($requestData['phones'] as $phone) {
+                $user->phones()->create($phone);            //cria o telefone
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return 'Mensagem: ' . $exception->getMessage();
+        }
 
         /*
         CODIGO DE RELACIONAMENTO ENTRE user e address
@@ -33,7 +47,5 @@ class RegisterController extends Controller
         $password = bcrypt($requestData['password']);
 
         $requestData['password'] = $password; */
-
-
     }
 }
