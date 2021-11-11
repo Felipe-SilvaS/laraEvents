@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\{RegisterController, LoginController};
 use App\Http\Controllers\Participant\Dashboard\DashboardController;
 
 use Illuminate\Support\Facades\Http;
@@ -19,5 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('register',  [RegisterController::class, 'create'])->name('auth.register.create');
-Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');// Rota de cadastro de Usuarios
-Route::get('participant/dashboard', [DashboardController::class, 'index'])->name('partcipant,dashboard.index');
+Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store'); // Rota de cadastro de Usuarios
+Route::get('login', [LoginController::class, 'create'])->name('auth.login.create');
+
+//ROTAS COM AUTENTIFICAÇÃO
+Route::get('participant/dashboard', [DashboardController::class, 'index'])
+    ->name('partcipant,dashboard.index')
+    ->middleware('auth');
+
