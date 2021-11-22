@@ -37,9 +37,11 @@ Route::group(['as' => 'auth.'],  function () {
 //ROTAS COM AUTENTIFICAÇÃO
 Route::group(['middleware' => 'auth'], function () {
     Route::get('participant/dashboard', [ParticipantDashboardController::class, 'index'])
-        ->name('participant.dashboard.index');
+        ->name('participant.dashboard.index')
+        ->middleware('role:participant');
 
 
     Route::get('organization/dashboard', [OrganizationDashboardController::class, 'index'])
-        ->name('organization.dashboard.index');
+        ->name('organization.dashboard.index')
+        ->middleware('role:organization');;
 });

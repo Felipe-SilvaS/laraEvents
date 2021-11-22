@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 
 
@@ -25,16 +26,10 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            $userRole = auth()->user()->role;
 
             //redirecionamento conforme 'tipo' de usuário
-            if ($userRole === 'participant') {
-                return redirect()->route('participant.dashboard.index');
-            }
-
-            if ($userRole === 'organization') {
-                return redirect()->route('organization.dashboard.index');
-            }
+            $userRole = auth()->user()->role;
+            return redirect(UserService::getDashboardRouteBasedOnUserRole($userRole));
             //---------------------------------------------------------
 
         }
