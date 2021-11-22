@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
@@ -32,10 +32,6 @@ class User extends Model
     //relationships
     public function address()
     {
-<<<<<<< HEAD
-        return $this->hasOne(Address::class);
-    }
-=======
         return $this->hasOne(Address::class); // relacionamento 1:N
     }
 
@@ -44,10 +40,9 @@ class User extends Model
     }
 
     //Mutators
->>>>>>> teste
 
     //Mutators
-    
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
