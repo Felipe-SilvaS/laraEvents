@@ -31,8 +31,10 @@ class RegisterController extends Controller
                 $user->phones()->create($phone);            //cria o telefone
             }
             DB::commit();
-            return 'Mensagem: usuário cadastrado';
-        } catch (\Exception $exception) {
+            return redirect()
+                ->route('auth.login.create')
+                ->with('success', 'Conta criada com sucesso! Efetue o Login ');
+        }   catch (\Exception $exception) {
             DB::rollback();
             return 'Mesagem: ' . $exception->getMessage();
         }

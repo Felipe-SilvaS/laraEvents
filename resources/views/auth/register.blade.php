@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <input type="text" name="phones[0][number]"
                                 class="form-control phone {{ $errors->has('phones.0.number') ? 'is-invalid' : '' }}"
-                                placeholder="Telefone" value='{{ old('phones.number') }}'>
+                                placeholder="Telefone" value='{{ old('phones.0.number') }}'>
                             <div class="invalid-feedback">{{ $errors->first('phones.0.number') }}</div>
                         </div>
                     </div>

@@ -17,13 +17,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// ROTAS SEM AUTENTIFICAÇÃO
+Route::group(['as' => 'auth.'],  function () {
+    Route::group(['middleware' => 'guest'], function () {
+    Route::get('register',  [RegisterController::class, 'create'])->name('register.create');
+    Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('login', [LoginController::class, 'create'])->name('login.create');
+    Route::post('login', [LoginController::class, 'store'])->name('login.store');
+});
 
-Route::get('register',  [RegisterController::class, 'create'])->name('auth.register.create');
-Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store'); // Rota de cadastro de Usuarios
-Route::get('login', [LoginController::class, 'create'])->name('auth.login.create');
+
+    Route::post('logout', [LoginController::class, 'destroy'])
+    ->name('login.destroy')
+    ->middleware('auth'); //desloga
+});
+
 
 //ROTAS COM AUTENTIFICAÇÃO
 Route::get('participant/dashboard', [DashboardController::class, 'index'])
-    ->name('partcipant,dashboard.index')
+    ->name('participant.dashboard.index')
     ->middleware('auth');
-
