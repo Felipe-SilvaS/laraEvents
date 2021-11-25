@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    //indica ao laravel para usar o estilo do boostrap
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }
