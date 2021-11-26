@@ -56,5 +56,10 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('events.create');
 
         Route::post('events', [EventController::class, 'store'])->name('events.store');
+
+        Route::get('events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+
+        //Rotas de atualização usa-se o método Http put
+        Route::put('events/{event}', [EventController::class, 'update'])->name('events.update');
     });
 });

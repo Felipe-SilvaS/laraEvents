@@ -29,7 +29,13 @@
                     <td class="align-middle">{{ $event->speaker_name }}</td>
                     <td class="align-middle">{{ $event->start_date_formatted }}</td>
                     <td class="align-middle">{{ $event->end_date_formatted }}</td>
-                    <td class="align-middle"></td>
+                    <td class="align-middle">
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route('organization.events.edit', $event->id) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
