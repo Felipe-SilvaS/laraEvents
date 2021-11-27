@@ -31,9 +31,17 @@
                     <td class="align-middle">{{ $event->end_date_formatted }}</td>
                     <td class="align-middle">
                         <div class="d-flex align-items-center">
-                            <a href="{{ route('organization.events.edit', $event->id) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('organization.events.edit', $event->id) }}"
+                                class="btn btn-sm btn-primary mr-2">
                                 <i class="fa fa-edit"></i>
                             </a>
+                            <form action="{{ route('organization.events.destroy', $event->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger confirm-submit">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>
@@ -42,4 +50,8 @@
     </table>
     <!-- Cria Paginação -->
     {{ $events->withQueryString()->links() }}
+@endsection
+
+@section('js')
+    <script src="{{asset('js/organization/events/index.js')}}"></script>
 @endsection

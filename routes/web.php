@@ -61,5 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         //Rotas de atualização usa-se o método Http put
         Route::put('events/{event}', [EventController::class, 'update'])->name('events.update');
+
+        Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     });
 });
